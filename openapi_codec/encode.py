@@ -160,6 +160,8 @@ def _get_parameters(link, encoding):
             }
             if field.type == 'array':
                 parameter['items'] = {'type': 'string'}
+            if field.example:
+                parameter['x-example'] = field.example
             parameters.append(parameter)
 
     if properties:

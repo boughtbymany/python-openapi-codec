@@ -185,7 +185,12 @@ def _get_responses(link):
     Returns minimally acceptable responses object based
     on action / method type.
     """
-    template = {'description': ''}
+    template = {
+        'description': '',
+        'schema': {
+            'type': 'object'
+        }
+    }
     if link.action.lower() == 'post':
         return {'201': template}
     if link.action.lower() == 'delete':

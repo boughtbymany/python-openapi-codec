@@ -104,6 +104,7 @@ def _get_parameters(link, encoding):
     parameters = []
     properties = {}
     required = []
+    example = {}
 
     for field in link.fields:
         location = get_location(link, field)
@@ -136,6 +137,10 @@ def _get_parameters(link, encoding):
                 properties[field.name] = schema_property
                 if field.required:
                     required.append(field.name)
+
+                if field.example:
+                    example[field.name] = field.example
+
         elif location == 'body':
             if encoding == 'application/octet-stream':
                 # https://github.com/OAI/OpenAPI-Specification/issues/50#issuecomment-112063782
@@ -175,6 +180,8 @@ def _get_parameters(link, encoding):
         }
         if required:
             parameter['schema']['required'] = required
+        if example:
+            parameter['schema']['example'] = example
         parameters.append(parameter)
 
     return parameters

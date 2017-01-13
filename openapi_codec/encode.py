@@ -140,6 +140,8 @@ def _get_parameters(link, encoding):
 
                 if field.example:
                     example[field.name] = field.example
+                else:
+                    example[field.name] = field.name
 
         elif location == 'body':
             if encoding == 'application/octet-stream':
